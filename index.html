@@ -2,25 +2,42 @@
 <head>
     <title> Noughts and crosses</title>
 
+
 </head>
 <body>
-    <h1 style ="text-align: center">NOUGHTS AND CROSSES</h1>
-    <table>
+<h1 style ="text-align: center">NOUGHTS AND CROSSES</h1>
+    <table align="center";border =1 width="50%";border=1 height ="65%">
         <tr>
-            <td>oNE</td>
-            <td>One</td>
-            <td>oNE</td>
+
+            <td style ="background-color: red; width= 150" id ="One" onClick="display_input('case1')">
+
+            </td>
+            <td style ="background-color: blue" id ="Two" onClick="display_input('case2')" >
+
+            </td>
+            <td style ="background-color: red" id ="Three" onClick="display_input('case3')">One</td>
         </tr>
         <tr>
-            <td>tWO</td>
-            <td>tWO</td>
-            <td>tWOO</td>
+            <td style ="background-color: blue" id ="Four" onClick="display_input('case4')">Two</td>
+            <td style ="background-color: red" id ="Five" onClick="display_input('case5')">Two</td>
+            <td style ="background-color: blue" id ="Six" onClick="display_input('case6')">Two</td>
         </tr>
         <tr>
-            <td>tWO</td>
-            <td>tWO</td>
-            <td>tWO</td>
+            <td style ="background-color: red" id ="Seven" onClick="display_input('case7')">Two</td>
+            <td style ="background-color: blue" id ="Eight" onClick="display_input('case8')">Two</td>
+            <td style ="background-color: red" id ="Nine" onClick="display_input('case9')">Two</td>
         </tr>
     </table>
+
+<h3 style = "text-align:center">Rules</h3>
+<div style="width: 25%; margin-left: auto; margin-right: auto;">
+    <ul>
+        <li> The first person to get their three shapes in a row wins</li>
+        <li> Each player must take turns</li>
+        <li>Squares cannot be reused</li>
+        <li>If all the squares are used and there is no winner, it is a draw</li>
+    </ul>
+</div>
+<script type="text/javascript" src ="jdxa.js"></script>
 </body>
 </html>
