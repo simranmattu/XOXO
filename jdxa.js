@@ -8,12 +8,17 @@ function display_input(square){
         if (document.getElementById(square).innerHTML == "X"||document.getElementById(square).innerHTML == "O"){
             window.alert("Try another square");
             document.getElementById(square).innerHTML = "X";
-            checkWinner()
+
+
             }
            else{
             document.getElementById(square).innerHTML = "X";
-        player_one = 0;
-            checkWinner()
+            player_one = 0;
+            checkWinner("case1","case2","case3")
+            checkWinner("case4","case5","case6")
+            checkWinner("case7","case8","case9")
+
+
             }
     }
 
@@ -28,12 +33,19 @@ function display_input(square){
     else {
         if (document.getElementById(square).innerHTML == "O"||document.getElementById(square).innerHTML == "X" ){
              window.alert("Try another square");
-             document.getElementById(square).innerHTML = "0";
+             document.getElementById(square).innerHTML = "O";
 
                     }
         else{
             document.getElementById(square).innerHTML = "O";
-        player_one = 1;
+            player_one = 1;
+            checkWinner("case1","case2","case3")
+            checkWinner("case4","case5","case6")
+            checkWinner("case7","case8","case9")
+
+//            var a, b, c;
+//            c = 1;
+//            var d = a || b || c;
                     }
             }
 
@@ -41,15 +53,14 @@ function display_input(square){
 }
 
 //--------------------------------WINNER CODE--------------------------------------------------------------------------
+var winner ;
+function checkWinner(c1,c2,c3){
+    if (document.getElementById(c1).innerHTML == document.getElementById(c2).innerHTML &&
+        document.getElementById(c2).innerHTML== document.getElementById(c3).innerHTML &&
+         document.getElementById(c1).innerHTML=="X" || document.getElementById(c1).innerHTML=="O"){
 
-function checkWinner(){
-    if (document.getElementById("case1").innerHTML == document.getElementById("case2").innerHTML && document.getElementById("case2").innerHTML== document.getElementById("case3").innerHTML){
+         winner = document.getElementById(c1).innerHTML;
 
-         var winner = document.getElementById("case1").innerHTML;
-         window.alert("Well done player"+winner+ "is the winner " );
-            }
-    else{
-            window.alert("You are not the winner"+ winner);//
             }
 
 }
