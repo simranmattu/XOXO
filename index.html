@@ -8,6 +8,8 @@
 
 <h1 style ="text-align: center">NOUGHTS AND CROSSES</h1>
     <table align="center">
+
+
         <thead>
             <tr style ="font-family: Arial; colspan = 3; text-align: center">
                 Gameboard
@@ -15,26 +17,29 @@
         </thead>
 
 
-        <tr>
 
-            <td width ="200" height = "200" style ="background-color: red; width= 150" id ="case1" onClick="display_input('case1') ">
+        <tbody data-bind = "foreach: gridSetup">
+        <tr data-bind ="foreach: gridSetup">
+
+            <td width ="200" height = "200"  id ="case1" onClick="display_input('case1') ">
 
             </td>
-            <td  width ="200" height = "200" style ="background-color: blue" id ="case2" onClick="display_input('case2')" >
+            <td  width ="200" height = "200"  id ="case2" onClick="display_input('case2')" >
 
             </td>
-            <td width ="200" height = "200" style ="background-color: red" id ="case3" onClick="display_input('case3')"></td>
+            <td width ="200" height = "200"  id ="case3" onClick="display_input('case3')"></td>
         </tr>
-        <tr>
-            <td width ="200" height = "200" style ="background-color: blue" id ="case4" onClick="display_input('case4')"></td>
-            <td width ="200" height = "200" style ="background-color: red" id ="case5" onClick="display_input('case5')"></td>
-            <td width ="200" height = "200" style ="background-color: blue" id ="case6" onClick="display_input('case6')"></td>
+        <tr data-bind ="foreach: gridSetup">
+            <td width ="200" height = "200"  id ="case4" onClick="display_input('case4')"></td>
+            <td width ="200" height = "200"  id ="case5" onClick="display_input('case5')"></td>
+            <td width ="200" height = "200"  id ="case6" onClick="display_input('case6')"></td>
         </tr>
-        <tr>
-            <td width ="200" height = "200" style ="background-color: red" id ="case7" onClick="display_input('case7')"></td>
-            <td width ="200" height = "200" style ="background-color: blue" id ="case8" onClick="display_input('case8')"></td>
-            <td width ="200" height = "200" style ="background-color: red" id ="case9" onClick="display_input('case9')"></td>
+        <tr data-bind ="foreach: gridSetup">
+            <td width ="200" height = "200"  id ="case7" onClick="display_input('case7')"></td>
+            <td width ="200" height = "200"  id ="case8" onClick="display_input('case8')"></td>
+            <td width ="200" height = "200"  id ="case9" onClick="display_input('case9')"></td>
         </tr>
+        </tbody>
     </table>
 
 <h3 style = "text-align:center">Rules</h3>

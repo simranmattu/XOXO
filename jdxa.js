@@ -91,13 +91,22 @@ function fetchX(location){
     }
 
 function checkX(location){
-    document.getElementById(location).innerHTML =="X"
-    }
+    return document.getElementById(location).innerHTML =="X"
 
+    }
 
 function fetchO(location){
     document.getElementById(location).innerHTML ="O"
     }
 function checkO(location){
-    document.getElementById(location).innerHTML =="O"
+    return document.getElementById(location).innerHTML =="O"
+    return "O"
     }
+//---------------------------------------------------------------------------------------------------------------------------
+function Grid() {
+    this.gridSetup = ko.observableArray([
+     new row (null, null, null),
+     new row (null, null, null),
+     new row (null, null, null)
+     ]);
+     }
