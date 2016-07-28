@@ -2,7 +2,7 @@
 <head>
     <title> Noughts and crosses</title>
 
-
+    <link rel="stylesheet" type="tesxt/css" href="tictac.css">
 </head>
 <body>
 
@@ -14,8 +14,9 @@
             </tr>
         </thead>
 
+<tbody data-bind = "foreach: gridSetup">
 
-        <tr>
+        <tr data-bind = "foreach: gridSetup">
 
             <td width ="200" height = "200" style ="background-color: red; width= 150" id ="case1" onClick="display_input('case1') ">
 
@@ -35,6 +36,7 @@
             <td width ="200" height = "200" style ="background-color: blue" id ="case8" onClick="display_input('case8')"></td>
             <td width ="200" height = "200" style ="background-color: red" id ="case9" onClick="display_input('case9')"></td>
         </tr>
+</tbody>
     </table>
 
 <h3 style = "text-align:center">Rules</h3>

@@ -6,8 +6,9 @@ var player_one = 1;
 
 function display_input(square){
     if ( player_one == 1 ){
-        if (checkX(square) ||checkO(square)){
+        if (document.getElementById(square).innerHTML == "X" ||document.getElementById(square).innerHTML == "O"){
             window.alert("Try another square");
+            document.getElementById(square).innerHTML = "X";
 
 
 
