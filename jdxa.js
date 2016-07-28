@@ -100,14 +100,14 @@ function fetchO(location){
     }
 function checkO(location){
     return document.getElementById(location).innerHTML =="O"
-    return "O"
+
     }
 
 //---------------------------------------------------------------------------------------------------------------------------
-function row(c1,c2,c3){
-    this.position1=c1
-    this.position2=c2
-    this.position3=c3
+//function row(c1,c2,c3){
+//    this.position1=c1
+ //   this.position2=c2
+ //   this.position3=c3
     }
 
 function Grid() {
