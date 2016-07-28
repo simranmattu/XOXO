@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="444d0e8f-7056-4844-8d34-d805b91b0794" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdxa.js" afterPath="$PROJECT_DIR$/jdxa.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tictac.css" afterPath="$PROJECT_DIR$/tictac.css" />
     </list>
     <ignored path="Adam's Stuff.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,8 +25,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+            <state relative-caret-position="600">
+              <caret line="24" column="75" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
               <folding>
                 <element signature="n#style#0;n#h1#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h3#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -41,8 +39,8 @@
       <file leaf-file-name="jdxa.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jdxa.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1307">
-              <caret line="112" column="37" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
+            <state relative-caret-position="1232">
+              <caret line="110" column="29" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -602,16 +600,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jdxa.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1307">
-          <caret line="112" column="37" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
+        <state relative-caret-position="1232">
+          <caret line="110" column="29" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+        <state relative-caret-position="600">
+          <caret line="24" column="75" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
           <folding>
             <element signature="n#style#0;n#h1#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h3#0;n#body#0;n#html#0;n#!!top" expanded="true" />
