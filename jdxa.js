@@ -102,6 +102,7 @@ function checkO(location){
     return document.getElementById(location).innerHTML =="O"
     return "O"
     }
+
 //---------------------------------------------------------------------------------------------------------------------------
 function Grid() {
     this.gridSetup = ko.observableArray([
