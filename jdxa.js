@@ -104,17 +104,13 @@ function checkO(location){
     }
 
 //---------------------------------------------------------------------------------------------------------------------------
-//function row(c1,c2,c3){
-//    this.position1=c1
- //   this.position2=c2
- //   this.position3=c3
-    }
+
 
 function Grid() {
     this.gridSetup = ko.observableArray([
-     new row (null, null, null),
-     new row (null, null, null),
-     new row (null, null, null)
+      ko.observableArray(["X", "", "O"]),
+      ko.observableArray(["X", "O", ""]),
+      ko.observableArray(["O", "", ""])
      ]);
      }
 ko.applyBindings(new Grid());
