@@ -6,7 +6,7 @@ var player_one = 1;
 
 function display_input(square){
     if ( player_one == 1 ){
-        if (document.getElementById(square).innerHTML == "X"||document.getElementById(square).innerHTML == "O"){
+        if (checkX(square) ||checkO(square)){
             window.alert("Try another square");
 
 
@@ -14,7 +14,7 @@ function display_input(square){
             }
            else{
 
-            this.document.getElementById(square).innerHTML = "X";
+            fetchX(square);
 
             player_one = 0;
             checkWinner("case1","case2","case3")
@@ -33,14 +33,14 @@ function display_input(square){
 
 
     else {
-        if (document.getElementById(square).innerHTML == "O"||document.getElementById(square).innerHTML == "X" ){
+        if (checkO(square)||checkX(square) ){
              window.alert("Try another square");
 
 
                     }
         else{
 
-            this.document.getElementById(square).innerHTML = "O";
+            fetchO(square);
 
 
             player_one = 1;
@@ -76,7 +76,7 @@ var winner ;
 function checkWinner(c1,c2,c3){
     if (document.getElementById(c1).innerHTML == document.getElementById(c2).innerHTML &&
         document.getElementById(c2).innerHTML== document.getElementById(c3).innerHTML &&
-         (document.getElementById(c1).innerHTML=="X" || document.getElementById(c1).innerHTML=="O")){
+         (document.getElementById(c1).innerHTML =="X" || document.getElementById(c1).innerHTML=="O")){
 
          winner = document.getElementById(c1).innerHTML;
          window.alert(winner+ " you are the winner")
@@ -84,6 +84,20 @@ function checkWinner(c1,c2,c3){
             }
 
 }
-//----------------------------------Simplify fetching---------------------------------------------------------------
+//----------------------------------Simplify fetching and equivalanece checking---------------------------------------------------------------
+
+function fetchX(location){
+    document.getElementById(location).innerHTML ="X"
+    }
+
+function checkX(location){
+    document.getElementById(location).innerHTML =="X"
+    }
 
 
+function fetchO(location){
+    document.getElementById(location).innerHTML ="O"
+    }
+function checkO(location){
+    document.getElementById(location).innerHTML =="O"
+    }
