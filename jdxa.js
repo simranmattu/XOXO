@@ -3,6 +3,7 @@
 
 var player_one = 1;
 //-------------------------------------------------------------------------------------------------------------------------
+
 function display_input(square){
     if ( player_one == 1 ){
         if (document.getElementById(square).innerHTML == "X"||document.getElementById(square).innerHTML == "O"){
@@ -12,7 +13,9 @@ function display_input(square){
 
             }
            else{
-            document.getElementById(square).innerHTML = "X";
+
+            this.document.getElementById(square).innerHTML = "X";
+
             player_one = 0;
             checkWinner("case1","case2","case3")
             checkWinner("case4","case5","case6")
@@ -36,7 +39,10 @@ function display_input(square){
 
                     }
         else{
-            document.getElementById(square).innerHTML = "O";
+
+            this.document.getElementById(square).innerHTML = "O";
+
+
             player_one = 1;
             checkWinner("case1","case2","case3")
             checkWinner("case4","case5","case6")
@@ -78,5 +84,6 @@ function checkWinner(c1,c2,c3){
             }
 
 }
-//-------------------------------------------------------------------------------------------------
+//----------------------------------Simplify fetching---------------------------------------------------------------
+
 
