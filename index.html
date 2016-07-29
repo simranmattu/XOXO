@@ -21,7 +21,7 @@
         <tbody data-bind = "foreach: gridSetup">
 
             <tr data-bind= "foreach: $data">
-                <td width ="200" height ="200" id ="case1" onClick="display_input('case1')">
+                <td width ="200" height ="200" id ="case1" data-bind="click: updateGrid">
                     <span data-bind="text:$parentContext.$index() "></span>
                     <span data-bind="text: $index"></span>
 

@@ -84,7 +84,7 @@ function checkWinner(c1,c2,c3){
             }
 
 }
-//----------------------------------Simplify fetching and equivalanece checking---------------------------------------------------------------
+//----------------------------------Simplify fetching and equivalence checking---------------------------------------------------------------
 
 function fetchX(location){
     document.getElementById(location).innerHTML ="X"
@@ -113,4 +113,29 @@ function Grid() {
       ko.observableArray(["O", "", ""])
      ]);
      }
-ko.applyBindings(new Grid());
+
+window.grid = new Grid();
+
+//function convertToObservable(gridSetup)
+//{
+//    var newList = [];
+//    $.each(gridSetup, function (i, obj) {
+//        var newObj = {};
+ //       Object.keys(obj).forEach(function (key) {
+ //           newObj[key] = ko.observable(obj[key]);
+//        });
+//        newList.push(newObj);
+//    });
+//    return newList;
+//}
+
+
+//
+//function updateGridX(){
+//    var new_Play =ko.utils.arrayFirst(list(),function(item){
+ //       return })
+    }
+//    this.gridSetup.push( window.grid.gridSetup()[]()[])
+//}
+
+ko.applyBindings(window.grid);
