@@ -125,8 +125,14 @@ function MyViewModel(){
     ko.observableArray([new MyViewModel_Cell(), new MyViewModel_Cell(), new MyViewModel_Cell()])
                 ]);
 
-
+    //this.gridSetup
+    //console.log(this.gridSetup())
+    this.gridSetup().forEach(function (items) {
+        console.log(items())
+    })
     }
+
+
 
 
 // //function display_input(square){
@@ -138,6 +144,7 @@ function MyViewModel(){
 function MyViewModel_Cell(){
     var self = this;
     self.userEntry = ko.observable('')
+
     this.updateGrid = function(location){
 
 
@@ -191,11 +198,9 @@ window.grid = new MyViewModel();
 //        newList.push(newObj);
 //    });
 //    return newList;
-//}
-
 
 //
 //function updateGridX(){
-ko.applyBindings(new MyViewModel());
+ko.applyBindings(window.grid);
 
 // works ------ko.applyBindings(new window.grid);
