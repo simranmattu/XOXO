@@ -128,6 +128,7 @@ function MyViewModel(){
 
     }
 
+
 // //function display_input(square){
    //    if ( player_one == 1 ){
    //        if (document.getElementById(square).innerHTML == "X" ||document.getElementById(square).innerHTML == "O"){
@@ -136,36 +137,48 @@ function MyViewModel(){
 
 function MyViewModel_Cell(){
     var self = this;
+    self.userEntry = ko.observable('')
     this.updateGrid = function(location){
-        this.userEntry = ko.observable('')
-    //console.log('B')
-        if (player_one == 1){
-            if (self.userEntry() == "X" || self.userEntry() == "O") {
-                window.alert("Try another square!");
 
-                }
+
+//console.log('B')
+        if (player_one == 1){
+            if (userEntryCheckX() || userEntryCheckO()) {
+                window.alert("Try another square!");
+            }
+
+
             else {
                 self.userEntry('O');
                 player_one=0
-
             }
+        }
+
+
         else {
-            if(self.userEntry() == "X" || self.userEntry() == "O") {
-                    window.alert("Try another square!");
-                 }
+            if(userEntryCheckX() || userEntryCheckO()) {
+                window.alert("Try another square!");
+            }
+
             else {
-                    self.userEntry('X');
-                    player_one=1
-                    }
-
-
-
-
-        ///console.log('A')
-        console.log(self.userEntry())
+                self.userEntry('X');
+                player_one=1
+             }
+        }
     }
-    }
-    }
+    function userEntryCheckX(){
+         return self.userEntry() == "X"
+         }
+         function userEntryCheckO(){
+              return self.userEntry() == "O"
+              }
+}
+
+
+
+
+
+
 window.grid = new MyViewModel();
 //function convertToObservable(gridSetup)
 //{
