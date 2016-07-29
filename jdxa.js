@@ -104,12 +104,15 @@ function checkO(location){
     }
 //--------------------------------------------------------------------------------------------------------------------------------
 
-//function Grid() {
-//this.gridSetup = ko.observableArray([
-//    new row (null, null, null )
-//    new row (null, null, null)
-//    new row (null, null, null)
+// function Grid() {
+// this.gridSetup = ko.observableArray([
+ // new row (null, null, null )
+//   new row (null, null, null)
+//   new row (null, null, null)
 //    ])};
 
+//ko.appkybindings (new Grid());
 
+//------------------------------------------------------------------------------------
 
+var Mut = new Array
