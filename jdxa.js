@@ -104,6 +104,7 @@ function checkO(location){
 
     }
 
+<<<<<<< HEAD
 //---------------------------------------------------------------------------------------------------------------------------
 
 
@@ -131,6 +132,21 @@ window.grid = new Grid();
 //}
 //
 //function updateGridX(){
+=======
+// function Grid() {
+// this.gridSetup = ko.observableArray([
+ // new row (null, null, null )
+//   new row (null, null, null)
+//   new row (null, null, null)
+//    ])};
 
+//ko.appkybindings (new Grid());
+>>>>>>> origin/master
 
+//------------------------------------------------------------------------------------
+
+<<<<<<< HEAD
 ko.applyBindings(window.grid);
+=======
+var Mut = new Array
+>>>>>>> origin/master
