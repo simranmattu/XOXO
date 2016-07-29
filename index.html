@@ -11,7 +11,7 @@
 <body>
 
 <h1 style ="text-align: center">NOUGHTS AND CROSSES</h1>
-    <table align="center">
+    <table align="center" >
 
 
         <thead>
@@ -25,12 +25,12 @@
         <tbody data-bind = "foreach: gridSetup">
 
             <tr data-bind= "foreach: $data">
-                <td width ="200" height ="200" id ="case1">
+                <td width ="200" height ="200" id ="case1" data-bind="click: updateGrid">
                     <span data-bind="text:$parentContext.$index() "></span>
                     <span data-bind="text: $index"></span>
 
 
-                    <span data-bind="text: $data"></span>
+                    <span data-bind="text: userEntry"></span>
                 </td>
             </tr>
 
