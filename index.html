@@ -1,6 +1,10 @@
 <html>
 <head>
     <title> Noughts and crosses</title>
+
+    <link rel="stylesheet" type="text/css" href="tictac.css">
+
+
     <link rel="stylesheet" type="text/css" href="tictac.css">
 
 </head>
@@ -21,15 +25,17 @@
         <tbody data-bind = "foreach: gridSetup">
 
             <tr data-bind= "foreach: $data">
-                <td width ="200" height ="200" id ="case1" data-bind="click: updateGrid">
+                <td width ="200" height ="200" id ="case1">
                     <span data-bind="text:$parentContext.$index() "></span>
                     <span data-bind="text: $index"></span>
+
 
                     <span data-bind="text: $data"></span>
                 </td>
             </tr>
 
         </tbody>
+
     </table>
 
 <h3 style = "text-align:center">Rules</h3>

@@ -6,8 +6,9 @@ var player_one = 1;
 
 function display_input(square){
     if ( player_one == 1 ){
-        if (checkX(square) ||checkO(square)){
+        if (document.getElementById(square).innerHTML == "X" ||document.getElementById(square).innerHTML == "O"){
             window.alert("Try another square");
+            document.getElementById(square).innerHTML = "X";
 
 
 
@@ -128,14 +129,8 @@ window.grid = new Grid();
 //    });
 //    return newList;
 //}
-
-
 //
 //function updateGridX(){
-//    var new_Play =ko.utils.arrayFirst(list(),function(item){
- //       return })
-    }
-//    this.gridSetup.push( window.grid.gridSetup()[]()[])
-//}
+
 
 ko.applyBindings(window.grid);
