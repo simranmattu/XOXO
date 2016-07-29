@@ -11,32 +11,32 @@
 <body>
 
 <h1 style ="text-align: center">NOUGHTS AND CROSSES</h1>
-    <table align="center">
+<table align="center" >
 
 
-        <thead>
-            <tr style ="font-family: Arial; colspan = 3; text-align: center">
-                Gameboard
-            </tr>
-        </thead>
+    <thead>
+    <tr style ="font-family: Arial; colspan = 3; text-align: center">
+        Gameboard
+    </tr>
+    </thead>
 
 
 
-        <tbody data-bind = "foreach: gridSetup">
+    <tbody data-bind = "foreach: gridSetup">
 
-            <tr data-bind= "foreach: $data">
-                <td width ="200" height ="200" id ="case1">
-                    <span data-bind="text:$parentContext.$index() "></span>
-                    <span data-bind="text: $index"></span>
+    <tr data-bind= "foreach: $data">
+        <td width ="200" height ="200" id ="case1" data-bind="click: updateGrid">
+      <!--     <span data-bind="text:$parentContext.$index() "></span>
+          <span data-bind="text: $index"></span> -->
 
 
-                    <span data-bind="text: $data"></span>
-                </td>
-            </tr>
+            <span data-bind="text: userEntry"></span>
+        </td>
+    </tr>
 
-        </tbody>
+    </tbody>
 
-    </table>
+</table>
 
 <h3 style = "text-align:center">Rules</h3>
 <div style="width: 25%; margin-left: auto; margin-right: auto;">
@@ -51,8 +51,7 @@
 <script type ="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script>
 
 <script type="text/javascript" src ="jdxa.js">
-
-
 </script>
 </body>
 </html>
+
