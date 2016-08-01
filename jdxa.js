@@ -107,13 +107,15 @@ function checkO(location){
 
 function MyViewModel(){
 
+console.log('Called MyViewModel')
+
     var self = this;
     self.gridSetup = ko.observableArray([
     ko.observableArray([new MyViewModel_Cell(),new MyViewModel_Cell(),new MyViewModel_Cell()]),
     ko.observableArray([new MyViewModel_Cell(),new MyViewModel_Cell() ,new MyViewModel_Cell() ]),
     ko.observableArray([new MyViewModel_Cell(), new MyViewModel_Cell(), new MyViewModel_Cell()])
                 ]);
-
+    self.count = 0
 
 
     //this.gridSetup
@@ -134,7 +136,10 @@ function MyViewModel(){
    //            document.getElementById(square).innerHTML = "X";
 
 function MyViewModel_Cell(){
+
     var self = this;
+    console.log('Called MyViewModel_Cell')
+
     self.userEntry = ko.observable('')
 
     this.updateGrid = function(location){
@@ -149,8 +154,16 @@ function MyViewModel_Cell(){
 
             else {
                 self.userEntry('O');
+                window.grid.count+=1
                 player_one=0
-                checkWinner()
+                checkWinnerHorizontal(0,0,1,2)
+                checkWinnerHorizontal(1,0,1,2)
+                checkWinnerHorizontal(2,0,1,2)
+                checkWinnerVertical(0,1,2,0)
+                checkWinnerVertical(0,1,2,1)
+                checkWinnerVertical(0,1,2,2)
+                checkWinnerDiagonal1()
+                checkDiagonal2()
             }
         }
 
@@ -162,8 +175,17 @@ function MyViewModel_Cell(){
 
             else {
                 self.userEntry('X');
+                window.grid.count+=1
                 player_one=1
-                checkWinner()
+                checkWinnerHorizontal(0,0,1,2)
+                checkWinnerHorizontal(1,0,1,2)
+                checkWinnerHorizontal(2,0,1,2)
+                checkWinnerVertical(0,1,2,0)
+                checkWinnerVertical(0,1,2,1)
+                checkWinnerVertical(0,1,2,2)
+                checkWinnerDiagonal1()
+                checkDiagonal2()
+
              }
         }
     }
@@ -174,18 +196,69 @@ function MyViewModel_Cell(){
               return self.userEntry() == "O"
               }
       var winner ;
-          function checkWinner(){
-              if (window.grid.gridSetup()[0]()[0].userEntry() == window.grid.gridSetup()[0]()[1].userEntry() &&
-                  window.grid.gridSetup()[0]()[1].userEntry() == window.grid.gridSetup()[0]()[2].userEntry()&&
-                   (window.grid.gridSetup()[0]()[0].userEntry() == 'X' || window.grid.gridSetup()[0]()[0].userEntry() == 'O')){
+          function checkWinnerHorizontal(row,p1,p2,p3){
+              if (window.grid.gridSetup()[row]()[p1].userEntry() == window.grid.gridSetup()[row]()[p2].userEntry() &&
+                  window.grid.gridSetup()[row]()[p2].userEntry() == window.grid.gridSetup()[row]()[p3].userEntry()&&
+                   (window.grid.gridSetup()[row]()[p1].userEntry() == 'X' || window.grid.gridSetup()[row]()[p1].userEntry() == 'O')){
 
-                   winner = window.grid.gridSetup()[0]()[0].userEntry() ;
+                   winner = window.grid.gridSetup()[row]()[row].userEntry() ;
                    window.alert(winner+ " you are the winner")
 
                       }
-}
+
+              else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
+
+                      window.alert("LOL it is a draw")
+                              }
+               }
+
+          function checkWinnerVertical(row1,row2,row3,p){
+              if (window.grid.gridSetup()[row1]()[p].userEntry() == window.grid.gridSetup()[row2]()[p].userEntry() &&
+                window.grid.gridSetup()[row2]()[p].userEntry() == window.grid.gridSetup()[row3]()[p].userEntry()&&
+                (window.grid.gridSetup()[row1]()[p].userEntry() == 'X' || window.grid.gridSetup()[row1]()[p].userEntry() == 'O')){
+
+                winner = window.grid.gridSetup()[row1]()[p].userEntry() ;
+                window.alert(winner+ " you are the winner")
+
+                                }
+
+              else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
+
+                                            window.alert("LOL it is a draw")
+                                                    }
+              }
+
+           function checkWinnerDiagonal1(){
+
+            if (window.grid.gridSetup()[0]()[0].userEntry() == window.grid.gridSetup()[1]()[1].userEntry() &&
+                window.grid.gridSetup()[1]()[1].userEntry() == window.grid.gridSetup()[2]()[2].userEntry()&&
+                (window.grid.gridSetup()[0]()[0].userEntry() == 'X' || window.grid.gridSetup()[0]()[0].userEntry() == 'O')){
+                winner = window.grid.gridSetup()[0]()[0].userEntry() ;
+                window.alert(winner+ " you are the winner")
+
+                                          }
+            else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
+
+                                  window.alert("LOL it is a draw")
+                                          }
+                    }
+            function checkDiagonal2(){
+                if (window.grid.gridSetup()[0]()[2].userEntry() == window.grid.gridSetup()[1]()[1].userEntry() &&
+                    window.grid.gridSetup()[1]()[1].userEntry() == window.grid.gridSetup()[2]()[0].userEntry()&&
+                    (window.grid.gridSetup()[0]()[2].userEntry() == 'X' || window.grid.gridSetup()[0]()[2].userEntry() == 'O')){
+                    winner = window.grid.gridSetup()[0]()[2].userEntry() ;
+                    window.alert(winner+ " you are the winner")
+
+                                           }
+                else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
+
+                                      window.alert("LOL it is a draw")
+                                              }
+                     }
 
 }
+
+
 
 
 
