@@ -1,6 +1,4 @@
 
-
-
 var player_one = 1;
 //-------------------------------------------------------------------------------------------------------------------------
 //
@@ -73,18 +71,8 @@ var player_one = 1;
 //}
 
 //--------------------------------WINNER CODE--------------------------------------------------------------------------
-var winner ;
-function checkWinner(c1,c2,c3){
-    if (document.getElementById(c1).innerHTML == document.getElementById(c2).innerHTML &&
-        document.getElementById(c2).innerHTML== document.getElementById(c3).innerHTML &&
-         (document.getElementById(c1).innerHTML =="X" || document.getElementById(c1).innerHTML=="O")){
 
-         winner = document.getElementById(c1).innerHTML;
-         window.alert(winner+ " you are the winner")
 
-            }
-
-}
 //----------------------------------Simplify fetching and equivalence checking---------------------------------------------------------------
 
 function fetchX(location){
@@ -119,35 +107,89 @@ function checkO(location){
 
 function MyViewModel(){
 
-    this.gridSetup = ko.observableArray([
+    var self = this;
+    self.gridSetup = ko.observableArray([
     ko.observableArray([new MyViewModel_Cell(),new MyViewModel_Cell(),new MyViewModel_Cell()]),
     ko.observableArray([new MyViewModel_Cell(),new MyViewModel_Cell() ,new MyViewModel_Cell() ]),
     ko.observableArray([new MyViewModel_Cell(), new MyViewModel_Cell(), new MyViewModel_Cell()])
                 ]);
 
 
+
+    //this.gridSetup
+    //console.log(this.gridSetup())
+    this.gridSetup().forEach(function (items) {
+        console.log(items())
+    })
     }
+
+
+
+
+
+// //function display_input(square){
+   //    if ( player_one == 1 ){
+   //        if (document.getElementById(square).innerHTML == "X" ||document.getElementById(square).innerHTML == "O"){
+   //            window.alert("Try another square");
+   //            document.getElementById(square).innerHTML = "X";
 
 function MyViewModel_Cell(){
     var self = this;
+    self.userEntry = ko.observable('')
+
     this.updateGrid = function(location){
 
+
+//console.log('B')
         if (player_one == 1){
-
-            self.userEntry('O');
-            player_one=0
-
+            if (userEntryCheckX() || userEntryCheckO()) {
+                window.alert("Try another square!");
             }
-         else{
-            self.userEntry('X');
-            player_one=1}
 
-        ///console.log('A')
-        console.log(self.userEntry())
+
+            else {
+                self.userEntry('O');
+                player_one=0
+                checkWinner()
+            }
+        }
+
+
+        else {
+            if(userEntryCheckX() || userEntryCheckO()) {
+                window.alert("Try another square!");
+            }
+
+            else {
+                self.userEntry('X');
+                player_one=1
+                checkWinner()
+             }
+        }
     }
-    this.userEntry = ko.observable('')
-    //console.log('B')
+    function userEntryCheckX(){
+         return self.userEntry() == "X"
+         }
+         function userEntryCheckO(){
+              return self.userEntry() == "O"
+              }
+      var winner ;
+          function checkWinner(){
+              if (window.grid.gridSetup()[0]()[0].userEntry() == window.grid.gridSetup()[0]()[1].userEntry() &&
+                  window.grid.gridSetup()[0]()[1].userEntry() == window.grid.gridSetup()[0]()[2].userEntry()&&
+                   (window.grid.gridSetup()[0]()[0].userEntry() == 'X' || window.grid.gridSetup()[0]()[0].userEntry() == 'O')){
+
+                   winner = window.grid.gridSetup()[0]()[0].userEntry() ;
+                   window.alert(winner+ " you are the winner")
+
+                      }
 }
+}
+
+
+
+
+
 window.grid = new MyViewModel();
 //function convertToObservable(gridSetup)
 //{
@@ -160,11 +202,9 @@ window.grid = new MyViewModel();
 //        newList.push(newObj);
 //    });
 //    return newList;
-//}
-
 
 //
 //function updateGridX(){
-ko.applyBindings(new MyViewModel());
+ko.applyBindings(window.grid);
 
 // works ------ko.applyBindings(new window.grid);

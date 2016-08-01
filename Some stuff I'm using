@@ -1,0 +1,29 @@
+window.grid.gridSetup()[0]()[0] = 'Z'
+"Z"
+window.grid.gridSetup()[0]()[0]
+"Z"
+window.grid.gridSetup()[0]
+d(){if(0<arguments.length)return d.Wa(c,arguments[0])&&(d.X(),c=arguments[0],d.W()),this;a.k.Ob(d);return c}
+window.grid.gridSetup()[0]()
+["Z", "", "O"]
+ko
+Object {version: "3.3.0", a: Object, utils: Object, H: Object, memoization: Object…}Cc: (b,c,h,k,q)D: (a,d,c)Da: (b)F: (b)Gc: (a,c,e)H: ObjectHb: (a)J: ()Ja: (a,b)L: ()N: (b,c,d,g)Nb: (b,d)Oa: (b)P: ()Q: ()S: (b)Sa: ObjectTa: (b,d)Tb: (b,c)Ub: (b,d,c)Vb: (c)Ya: ()Z: Object__tr_ambtns: (b,c)a: ObjectapplyBindingAccessorsToNode: (b,c,d)applyBindings: (a,b)applyBindingsToDescendants: (a,b)applyBindingsToNode: (b, c,d)b: (b,d)ba: (b)bindingHandlers: ObjectbindingProvider: ()cc: (b, c,d)cleanNode: (b)components: Objectcomputed: (b,d,c)computedContext: ObjectcontextFor: (b)d: ObjectdataFor: (b)dependentObservable: (b,d,c)e: Objecteb: (b,d,h,x,q)expressionRewriting: Objectextenders: Objectg: Objectgc: (b)getBindingHandler: (b)h: Objecthb: (b)i: ObjectignoreDependencies: (a,c,e)isComputed: (b)isObservable: (b)isSubscribable: (a)isWritableObservable: (b)isWriteableObservable: (b)j: (b,d,c)jqueryTmplTemplateEngine: ()jsonExpressionRewriting: Objectk: Objectkb: Objectmemoization: ObjectnativeTemplateEngine: ()observable: (b)observableArray: (b)pureComputed: (b,d)r: (b)removeNode: (b)renderTemplate: (b,d,h,x,q)sc: (b)selectExtensions: ObjectsetTemplateEngine: (b)subscribable: ()t: ObjecttemplateEngine: ()templateSources: ObjecttoJS: (c)toJSON: (b,c,d)ub: (a,b)unwrap: (b)utils: Objectva: (b,c,d)version: "3.3.0"virtualElements: Objectw: (b,d,c)__proto__: Object
+var b = ko.observable('a')
+undefined
+B
+VM486:1 Uncaught ReferenceError: B is not defined(…)(anonymous function) @ VM486:1
+b
+d(){if(0<arguments.length)return d.Wa(c,arguments[0])&&(d.X(),c=arguments[0],d.W()),this;a.k.Ob(d);return c}
+
+function MyViewModel(){
+
+    this.gridSetup = ko.observableArray([
+    ko.observableArray(["X", "", "O"]),
+    ko.observableArray(["X", "O", ""]),
+    ko.observableArray(["O", "", ""])
+         ]);
+
+    this.updateGrid = function(location){
+        this.gridSetup.add(location)
+        }
+    }
