@@ -27,3 +27,7 @@ function MyViewModel(){
         this.gridSetup.add(location)
         }
     }
+
+
+ <!--     <span data-bind="text:$parentContext.$index() "></span>
+                <span data-bind="text: $index"></span> -->

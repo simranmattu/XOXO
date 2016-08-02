@@ -7,8 +7,6 @@ var player_one = 1;
 
 function MyViewModel(){
 
-console.log('Called MyViewModel')
-
     var self = this;
     self.gridSetup = ko.observableArray([
     ko.observableArray([new MyViewModel_Cell(),new MyViewModel_Cell(),new MyViewModel_Cell()]),
@@ -25,10 +23,7 @@ console.log('Called MyViewModel')
 function MyViewModel_Cell(){
 
     var self = this;
-    console.log('Called MyViewModel_Cell')
-
     self.userEntry = ko.observable('')
-
     this.updateGrid = function(location){
 
 
@@ -88,7 +83,7 @@ function MyViewModel_Cell(){
                    (window.grid.gridSetup()[row]()[p1].userEntry() == 'X' || window.grid.gridSetup()[row]()[p1].userEntry() == 'O')){
 
                    winner = window.grid.gridSetup()[row]()[row].userEntry() ;
-                   window.alert(winner+ " you are the winner")
+                   window.alert("Congratulations player "+winner+ " you are the winner")
 
                       }
 
@@ -104,7 +99,7 @@ function MyViewModel_Cell(){
                 (window.grid.gridSetup()[row1]()[p].userEntry() == 'X' || window.grid.gridSetup()[row1]()[p].userEntry() == 'O')){
 
                 winner = window.grid.gridSetup()[row1]()[p].userEntry() ;
-                window.alert(winner+ " you are the winner")
+                window.alert("Congratulations player "+winner+ " you are the winner")
 
                                 }
 
@@ -120,7 +115,7 @@ function MyViewModel_Cell(){
                 window.grid.gridSetup()[1]()[1].userEntry() == window.grid.gridSetup()[2]()[2].userEntry()&&
                 (window.grid.gridSetup()[0]()[0].userEntry() == 'X' || window.grid.gridSetup()[0]()[0].userEntry() == 'O')){
                 winner = window.grid.gridSetup()[0]()[0].userEntry() ;
-                window.alert(winner+ " you are the winner")
+                window.alert("Congratulations player "+winner+ " you are the winner")
 
                                           }
             else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
@@ -133,7 +128,7 @@ function MyViewModel_Cell(){
                     window.grid.gridSetup()[1]()[1].userEntry() == window.grid.gridSetup()[2]()[0].userEntry()&&
                     (window.grid.gridSetup()[0]()[2].userEntry() == 'X' || window.grid.gridSetup()[0]()[2].userEntry() == 'O')){
                     winner = window.grid.gridSetup()[0]()[2].userEntry() ;
-                    window.alert(winner+ " you are the winner")
+                    window.alert("Congratulations player "+winner+ " you are the winner")
 
                                            }
                 else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
@@ -152,3 +147,22 @@ window.grid = new MyViewModel();
 ko.applyBindings(window.grid);
 //-------------------------------------------------------------------------------------------------------
 var myFirebaseRef = new Firebase("https://softwireworkexpxo.firebaseio.com/");
+
+
+myFirebaseRef.on("value", function(snapshot) {
+    for (x in snapshot.val()) {
+
+        var xmyFirebaseRef = new Firebase("https://softwireworkexpxo.firebaseio.com/"+x+"/");
+        xmyFirebaseRef.once("value", function(xsnapshot) {
+            var data = xsnapshot.val();
+            var name = data["name"];
+            console.log(name);
+        }
+        );
+    }
+}
+,function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+
