@@ -1,29 +1,33 @@
-//----------------------FIREBASE-------------------------------------------------------------
+//------------------------------FIREBASE------------------------------------------------------------
+
+var myFirebaseRef = new Firebase("https://softwireworkexpxo.firebaseio.com/");
+
 
 
 var player_one = 1;
 //-------------------------------------------------------------------------------------------------------------------------
 
 
-function MyViewModel(){
+function MyViewModel(gridData){
 
+console.log('A')
     var self = this;
     self.gridSetup = ko.observableArray([
-    ko.observableArray([new MyViewModel_Cell(),new MyViewModel_Cell(),new MyViewModel_Cell()]),
+    ko.observableArray([new MyViewModel_Cell(window.gridData.GameFinished1.row1.substring(0,1)),new MyViewModel_Cell(),new MyViewModel_Cell()]),
     ko.observableArray([new MyViewModel_Cell(),new MyViewModel_Cell() ,new MyViewModel_Cell() ]),
     ko.observableArray([new MyViewModel_Cell(), new MyViewModel_Cell(), new MyViewModel_Cell()])
                 ]);
     self.count = 0
 
     this.gridSetup().forEach(function (items) {
-        console.log(items())
+//        console.log(items())
     })
     }
 
-function MyViewModel_Cell(){
+function MyViewModel_Cell(value){
 
     var self = this;
-    self.userEntry = ko.observable('')
+    self.userEntry = ko.observable(value)
     this.updateGrid = function(location){
 
 
@@ -142,27 +146,32 @@ function MyViewModel_Cell(){
 
 }
 
-window.grid = new MyViewModel();
 
-ko.applyBindings(window.grid);
-//-------------------------------------------------------------------------------------------------------
-var myFirebaseRef = new Firebase("https://softwireworkexpxo.firebaseio.com/");
+myFirebaseRef.authWithCustomToken("y15j1bOZQnQkp2xUUMSMpKePjFYgdmU5x5xHnEXH", function(error, authData) {
+  if (error) {
+    console.log("Authentication Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+  }
+});
 
-
-myFirebaseRef.on("value", function(snapshot) {
-    for (x in snapshot.val()) {
-
-        var xmyFirebaseRef = new Firebase("https://softwireworkexpxo.firebaseio.com/"+x+"/");
-        xmyFirebaseRef.once("value", function(xsnapshot) {
-            var data = xsnapshot.val();
-            var name = data["name"];
-            console.log(name);
-        }
-        );
-    }
-}
-,function (errorObject) {
+// Attach an asynchronous callback to read the data at our posts reference
+myFirebaseRef.on("value", firebaseCallFinished, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
 });
 
+function firebaseCallFinished (snapshot) {
+  var gridData = snapshot.val()
+  window.gridData = gridData
+//  console.log(gridData);
+//  console.log(gridData.GameFinished1.row1.substring(0,1));
+  console.log('B')
+  window.grid = new MyViewModel();
+  ko.applyBindings(window.grid);
+}
+
+
+
+
+//-------------------------------------------------------------------------------------------------------
 
