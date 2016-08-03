@@ -24,6 +24,13 @@ console.log('A')
     })
     }
 
+//    function getGameData (game,c1,c2){
+//
+//
+//
+//        }
+//
+
 function MyViewModel_Cell(value){
 
     var self = this;
@@ -140,9 +147,9 @@ function MyViewModel_Cell(value){
                                       window.alert("LOL it is a draw")
                                               }
                      }
-            function get(){
-                window.grid.gridSetup()
-                }
+//            function get(row,position){
+//                window.grid.gridSetup()[row]()[position].userEntry()
+//                }
 
 }
 
