@@ -2,19 +2,29 @@
 
 var myFirebaseRef = new Firebase("https://softwireworkexpxo.firebaseio.com/");
 
-
-
 var player_one = 1;
 //-------------------------------------------------------------------------------------------------------------------------
+function chooseGame(){
+    var gameExists = false;
+    while(gameExists == false){
 
+        var gameChoice = window.prompt("Which game would you like to access? e.g. GameInProgress1, GameInProgress2 etc","Enter Here: ");
+        var existenceCheck = gridData.hasOwnProperty(gameChoice);
+        if (existenceCheck == true){
+            break
+            }
+    }
+    console.log(gameChoice);
+    return gameChoice;
+    }
 
-function MyViewModel(gridData){
+function MyViewModel(gameChoice){
 
     var self = this;
     self.gridSetup = ko.observableArray([
-    ko.observableArray([new MyViewModel_Cell(window.gridData.GameInProgress1.row1.substring(0,1)),new MyViewModel_Cell(window.gridData.GameInProgress1.row1.substring(2,3)),new MyViewModel_Cell(window.gridData.GameInProgress1.row1.substring(4,5))]),
-    ko.observableArray([new MyViewModel_Cell(window.gridData.GameInProgress1.row2.substring(0,1)),new MyViewModel_Cell(window.gridData.GameInProgress1.row2.substring(2,3)) ,new MyViewModel_Cell(window.gridData.GameInProgress1.row2.substring(4,5))]),
-    ko.observableArray([new MyViewModel_Cell(window.gridData.GameInProgress1.row3.substring(0,1)), new MyViewModel_Cell(window.gridData.GameInProgress1.row3.substring(2,3)), new MyViewModel_Cell(window.gridData.GameInProgress1.row3.substring(4,5))])
+    ko.observableArray([new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(0,1)),new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(2,3)),new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(4,5))]),
+    ko.observableArray([new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(0,1)),new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(2,3)) ,new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(4,5))]),
+    ko.observableArray([new MyViewModel_Cell(window.gridData[gameChoice].row3.substring(0,1)), new MyViewModel_Cell(window.gridData[gameChoice].row3.substring(2,3)), new MyViewModel_Cell(window.gridData[gameChoice].row3.substring(4,5))])
                 ]);
     self.count = 0
 
@@ -22,13 +32,6 @@ function MyViewModel(gridData){
 //        console.log(items())
     })
     }
-
-//    function getGameData (game,c1,c2){
-//
-//
-//
-//        }
-//
 
 function MyViewModel_Cell(value){
 
@@ -183,7 +186,6 @@ function MyViewModel_Cell(value){
 
 }
 
-
 myFirebaseRef.authWithCustomToken("y15j1bOZQnQkp2xUUMSMpKePjFYgdmU5x5xHnEXH", function(error, authData) {
   if (error) {
     console.log("Authentication Failed!", error);
@@ -199,17 +201,15 @@ myFirebaseRef.on("value", firebaseCallFinished, function (errorObject) {
 
 function firebaseCallFinished (snapshot) {
     if (!window.grid){
-    var gridData = snapshot.val()
+        var gridData = snapshot.val()
 
-  window.gridData = gridData
-  console.log(gridData);
+        window.gridData = gridData
+        var gameChoice= chooseGame();
 
-  window.grid = new MyViewModel();
-  ko.applyBindings(window.grid);
+        console.log(gridData);
+        window.grid = new MyViewModel(gameChoice);
+        ko.applyBindings(window.grid);
 }
 }
-
-
-
-//-------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
 
