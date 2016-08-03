@@ -10,12 +10,11 @@ var player_one = 1;
 
 function MyViewModel(gridData){
 
-console.log('A')
     var self = this;
     self.gridSetup = ko.observableArray([
-    ko.observableArray([new MyViewModel_Cell(window.gridData.GameFinished1.row1.substring(0,1)),new MyViewModel_Cell(),new MyViewModel_Cell()]),
-    ko.observableArray([new MyViewModel_Cell(),new MyViewModel_Cell() ,new MyViewModel_Cell() ]),
-    ko.observableArray([new MyViewModel_Cell(), new MyViewModel_Cell(), new MyViewModel_Cell()])
+    ko.observableArray([new MyViewModel_Cell(window.gridData.GameInProgress1.row1.substring(0,1)),new MyViewModel_Cell(window.gridData.GameInProgress1.row1.substring(2,3)),new MyViewModel_Cell(window.gridData.GameInProgress1.row1.substring(4,5))]),
+    ko.observableArray([new MyViewModel_Cell(window.gridData.GameInProgress1.row2.substring(0,1)),new MyViewModel_Cell(window.gridData.GameInProgress1.row2.substring(2,3)) ,new MyViewModel_Cell(window.gridData.GameInProgress1.row2.substring(4,5))]),
+    ko.observableArray([new MyViewModel_Cell(window.gridData.GameInProgress1.row3.substring(0,1)), new MyViewModel_Cell(window.gridData.GameInProgress1.row3.substring(2,3)), new MyViewModel_Cell(window.gridData.GameInProgress1.row3.substring(4,5))])
                 ]);
     self.count = 0
 
@@ -45,7 +44,27 @@ function MyViewModel_Cell(value){
 
 
             else {
-                self.userEntry('O');
+                self.userEntry('0');
+
+                // message when the data has finished synchronizing.
+                // Same as the previous example, except we will also display an alert
+                // message when the data has finished synchronizing.
+                var onComplete = function(error) {
+                  if (error) {
+                    console.log('Synchronization failed');
+                  } else {
+                    console.log('Synchronization succeeded');
+                  }
+                };
+
+                myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
+                                                         row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                         row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+
+
+
+
+
                 window.grid.count+=1
                 player_one=0
                 checkWinnerHorizontal(0,0,1,2)
@@ -67,6 +86,19 @@ function MyViewModel_Cell(value){
 
             else {
                 self.userEntry('X');
+
+                var onComplete = function(error) {
+                                  if (error) {
+                                    console.log('Synchronization failed');
+                                  } else {
+                                    console.log('Synchronization succeeded');
+                                  }
+                                };
+                myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
+                                                           row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                           row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+
+
                 window.grid.count+=1
                 player_one=1
                 checkWinnerHorizontal(0,0,1,2)
@@ -78,6 +110,7 @@ function MyViewModel_Cell(value){
                 checkWinnerDiagonal1()
                 checkDiagonal2()
 
+
              }
         }
     }
@@ -85,20 +118,20 @@ function MyViewModel_Cell(value){
          return self.userEntry() == "X"
          }
          function userEntryCheckO(){
-              return self.userEntry() == "O"
+              return self.userEntry() == "0"
               }
       var winner ;
           function checkWinnerHorizontal(row,p1,p2,p3){
               if (window.grid.gridSetup()[row]()[p1].userEntry() == window.grid.gridSetup()[row]()[p2].userEntry() &&
                   window.grid.gridSetup()[row]()[p2].userEntry() == window.grid.gridSetup()[row]()[p3].userEntry()&&
-                   (window.grid.gridSetup()[row]()[p1].userEntry() == 'X' || window.grid.gridSetup()[row]()[p1].userEntry() == 'O')){
+                   (window.grid.gridSetup()[row]()[p1].userEntry() == 'X' || window.grid.gridSetup()[row]()[p1].userEntry() == '0')){
 
                    winner = window.grid.gridSetup()[row]()[row].userEntry() ;
                    window.alert("Congratulations player "+winner+ " you are the winner")
 
                       }
 
-              else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
+              else if (window.grid.count == 9 && (winner!== "X" || winner != "0")){
 
                       window.alert("LOL it is a draw")
                               }
@@ -107,14 +140,14 @@ function MyViewModel_Cell(value){
           function checkWinnerVertical(row1,row2,row3,p){
               if (window.grid.gridSetup()[row1]()[p].userEntry() == window.grid.gridSetup()[row2]()[p].userEntry() &&
                 window.grid.gridSetup()[row2]()[p].userEntry() == window.grid.gridSetup()[row3]()[p].userEntry()&&
-                (window.grid.gridSetup()[row1]()[p].userEntry() == 'X' || window.grid.gridSetup()[row1]()[p].userEntry() == 'O')){
+                (window.grid.gridSetup()[row1]()[p].userEntry() == 'X' || window.grid.gridSetup()[row1]()[p].userEntry() == '0')){
 
                 winner = window.grid.gridSetup()[row1]()[p].userEntry() ;
                 window.alert("Congratulations player "+winner+ " you are the winner")
 
                                 }
 
-              else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
+              else if (window.grid.count == 9 && (winner!== "X" || winner != "0")){
 
                                             window.alert("LOL it is a draw")
                                                     }
@@ -124,12 +157,12 @@ function MyViewModel_Cell(value){
 
             if (window.grid.gridSetup()[0]()[0].userEntry() == window.grid.gridSetup()[1]()[1].userEntry() &&
                 window.grid.gridSetup()[1]()[1].userEntry() == window.grid.gridSetup()[2]()[2].userEntry()&&
-                (window.grid.gridSetup()[0]()[0].userEntry() == 'X' || window.grid.gridSetup()[0]()[0].userEntry() == 'O')){
+                (window.grid.gridSetup()[0]()[0].userEntry() == 'X' || window.grid.gridSetup()[0]()[0].userEntry() == '0')){
                 winner = window.grid.gridSetup()[0]()[0].userEntry() ;
                 window.alert("Congratulations player "+winner+ " you are the winner")
 
                                           }
-            else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
+            else if (window.grid.count == 9 && (winner!== "X" || winner != "0")){
 
                                   window.alert("LOL it is a draw")
                                           }
@@ -137,19 +170,16 @@ function MyViewModel_Cell(value){
             function checkDiagonal2(){
                 if (window.grid.gridSetup()[0]()[2].userEntry() == window.grid.gridSetup()[1]()[1].userEntry() &&
                     window.grid.gridSetup()[1]()[1].userEntry() == window.grid.gridSetup()[2]()[0].userEntry()&&
-                    (window.grid.gridSetup()[0]()[2].userEntry() == 'X' || window.grid.gridSetup()[0]()[2].userEntry() == 'O')){
+                    (window.grid.gridSetup()[0]()[2].userEntry() == 'X' || window.grid.gridSetup()[0]()[2].userEntry() == '0')){
                     winner = window.grid.gridSetup()[0]()[2].userEntry() ;
                     window.alert("Congratulations player "+winner+ " you are the winner")
 
                                            }
-                else if (window.grid.count == 9 && (winner!== "X" || winner != "O")){
+                else if (window.grid.count == 9 && (winner!== "X" || winner != "0")){
 
                                       window.alert("LOL it is a draw")
                                               }
                      }
-//            function get(row,position){
-//                window.grid.gridSetup()[row]()[position].userEntry()
-//                }
 
 }
 
@@ -168,15 +198,16 @@ myFirebaseRef.on("value", firebaseCallFinished, function (errorObject) {
 });
 
 function firebaseCallFinished (snapshot) {
-  var gridData = snapshot.val()
+    if (!window.grid){
+    var gridData = snapshot.val()
+
   window.gridData = gridData
-//  console.log(gridData);
-//  console.log(gridData.GameFinished1.row1.substring(0,1));
-  console.log('B')
+  console.log(gridData);
+
   window.grid = new MyViewModel();
   ko.applyBindings(window.grid);
 }
-
+}
 
 
 
