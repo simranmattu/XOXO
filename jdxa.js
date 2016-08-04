@@ -5,15 +5,67 @@ var myFirebaseRef = new Firebase("https://softwireworkexpxo.firebaseio.com/");
 var player_one = 1;
 //-------------------------------------------------------------------------------------------------------------------------
 function chooseGame(){
+
+//    function go() {
+//      var userId = prompt('Username?', 'Guest');
+//      // Consider adding '/<unique id>' if you have multiple games.
+//      var gameRef = new Firebase("https://softwireworkexpxo.firebaseio.com/");
+//
+//    };
+//    go()
+
+
     var gameExists = false;
     while(gameExists == false){
-
+        var gamePlayPlace = window.prompt("Would you like to play locally or multiplayer?", "Enter Here: ");
         var gameChoice = window.prompt("Which game would you like to access? e.g. GameInProgress1, GameInProgress2 etc","Enter Here: ");
+
         var existenceCheck = gridData.hasOwnProperty(gameChoice);
+
+
+
+
+
+
+
+
+
+
+
+
+
         if (existenceCheck == true){
             break
             }
+
     }
+    if (gamePlayPlace == "multiplayer"){
+            var playerChoice = window.prompt("Which player would you like to be? e.g. Player1 or Player2","Enter Here: ");
+            if (playerChoice == "Player1"){
+                var playerCheck = window.gridData[gameChoice].player;
+                if (playerChoice == "Player"+playerCheck){
+                    window.confirm("Confirmed: You are player 1")
+                }
+                else{
+                    window.confirm("Unfortunately Player1 is not available ")
+                    playerChoice = "Player2"
+                }
+
+                }
+            else{
+                var playerCheck = window.gridData[gameChoice].player;
+                if (playerChoice == "Player"+playerCheck){
+                window.prompt("Confirmed: You are player 2")
+                }
+                else{
+                    window.confirm("Unfortunately Player2 is not available ")
+                    playerChoice = "Player1"
+                }
+
+
+                }
+
+        }
     console.log(gameChoice);
     return gameChoice;
     }
