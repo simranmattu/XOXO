@@ -6,33 +6,13 @@ var player_one = 1;
 //-------------------------------------------------------------------------------------------------------------------------
 function chooseGame(){
 
-//    function go() {
-//      var userId = prompt('Username?', 'Guest');
-//      // Consider adding '/<unique id>' if you have multiple games.
-//      var gameRef = new Firebase("https://softwireworkexpxo.firebaseio.com/");
-//
-//    };
-//    go()
-
 
     var gameExists = false;
     while(gameExists == false){
-        var gamePlayPlace = window.prompt("Would you like to play locally or multiplayer?", "Enter Here: ");
+         window.gamePlayPlace = window.prompt("Would you like to play locally or multiplayer?", "Enter Here: ");
         var gameChoice = window.prompt("Which game would you like to access? e.g. GameInProgress1, GameInProgress2 etc","Enter Here: ");
 
-        var existenceCheck = gridData.hasOwnProperty(gameChoice);
-
-
-
-
-
-
-
-
-
-
-
-
+        var existenceCheck = window.gridData.hasOwnProperty(gameChoice);
 
         if (existenceCheck == true){
             break
@@ -40,26 +20,26 @@ function chooseGame(){
 
     }
     if (gamePlayPlace == "multiplayer"){
-            var playerChoice = window.prompt("Which player would you like to be? e.g. Player1 or Player2","Enter Here: ");
-            if (playerChoice == "Player1"){
+            window.playerChoice = window.prompt("Which player would you like to be? e.g. Player1 or Player2","Enter Here: ");
+            if (window.playerChoice == "Player1"){
                 var playerCheck = window.gridData[gameChoice].player;
-                if (playerChoice == "Player"+playerCheck){
+                if (window.playerChoice == "Player"+playerCheck){
                     window.confirm("Confirmed: You are player 1")
                 }
                 else{
                     window.confirm("Unfortunately Player1 is not available ")
-                    playerChoice = "Player2"
+                    window.playerChoice = "Player2"
                 }
 
                 }
             else{
                 var playerCheck = window.gridData[gameChoice].player;
-                if (playerChoice == "Player"+playerCheck){
+                if (window.playerChoice == "Player"+playerCheck){
                 window.prompt("Confirmed: You are player 2")
                 }
                 else{
                     window.confirm("Unfortunately Player2 is not available ")
-                    playerChoice = "Player1"
+                    window.playerChoice = "Player1"
                 }
 
 
@@ -70,9 +50,10 @@ function chooseGame(){
     return gameChoice;
     }
 
-function MyViewModel(gameChoice){
+function MyViewModel(gameChoice, isLocalGame){
 
     var self = this;
+    self.isLocalGame= isLocalGame;
     self.gridSetup = ko.observableArray([
     ko.observableArray([new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(0,1)),new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(2,3)),new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(4,5))]),
     ko.observableArray([new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(0,1)),new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(2,3)) ,new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(4,5))]),
@@ -90,12 +71,90 @@ function MyViewModel_Cell(value){
     var self = this;
     self.userEntry = ko.observable(value)
     this.updateGrid = function(location){
+    if (self.isLocalGame) {
+         if (player_one == 1){
+                    if (userEntryCheckX() || userEntryCheckO()) {
+                        window.alert("Try another square!");
+                    }
 
 
-        if (player_one == 1){
+                    else {
+                        self.userEntry('0');
+
+                        // message when the data has finished synchronizing.
+                        // Same as the previous example, except we will also display an alert
+                        // message when the data has finished synchronizing.
+                        var onComplete = function(error) {
+                          if (error) {
+                            console.log('Synchronization failed');
+                          } else {
+                            console.log('Synchronization succeeded');
+                          }
+                        };
+
+                        myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
+                                                                 row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                                 row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+
+
+
+
+
+                        window.grid.count+=1
+                        player_one=0
+                        checkWinnerHorizontal(0,0,1,2)
+                        checkWinnerHorizontal(1,0,1,2)
+                        checkWinnerHorizontal(2,0,1,2)
+                        checkWinnerVertical(0,1,2,0)
+                        checkWinnerVertical(0,1,2,1)
+                        checkWinnerVertical(0,1,2,2)
+                        checkWinnerDiagonal1()
+                        checkDiagonal2()
+                    }
+                }
+
+
+                else {
+                    if(userEntryCheckX() || userEntryCheckO()) {
+                        window.alert("Try another square!");
+                    }
+
+                    else {
+                        self.userEntry('X');
+
+                        var onComplete = function(error) {
+                                          if (error) {
+                                            console.log('Synchronization failed');
+                                          } else {
+                                            console.log('Synchronization succeeded');
+                                          }
+                                        };
+                        myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
+                                                                   row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                                   row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+
+
+                        window.grid.count+=1
+                        player_one=1
+                        checkWinnerHorizontal(0,0,1,2)
+                        checkWinnerHorizontal(1,0,1,2)
+                        checkWinnerHorizontal(2,0,1,2)
+                        checkWinnerVertical(0,1,2,0)
+                        checkWinnerVertical(0,1,2,1)
+                        checkWinnerVertical(0,1,2,2)
+                        checkWinnerDiagonal1()
+                        checkDiagonal2()
+
+
+                     }
+                }
+
+    }
+    else{
+        if (playerChoice == "Player1" ){
             if (userEntryCheckX() || userEntryCheckO()) {
                 window.alert("Try another square!");
-            }
+                }
 
 
             else {
@@ -105,16 +164,17 @@ function MyViewModel_Cell(value){
                 // Same as the previous example, except we will also display an alert
                 // message when the data has finished synchronizing.
                 var onComplete = function(error) {
-                  if (error) {
-                    console.log('Synchronization failed');
-                  } else {
-                    console.log('Synchronization succeeded');
-                  }
-                };
+                    if (error) {
+                        console.log('Synchronization failed');
+                         }
+                         else {
+                            console.log('Synchronization succeeded');
+                            }
+                            };
 
                 myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
-                                                         row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
-                                                         row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+                                                          row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                          row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
 
 
 
@@ -130,28 +190,32 @@ function MyViewModel_Cell(value){
                 checkWinnerVertical(0,1,2,2)
                 checkWinnerDiagonal1()
                 checkDiagonal2()
-            }
-        }
+                                }
+                            }
 
 
-        else {
+
+
+
+        else{
             if(userEntryCheckX() || userEntryCheckO()) {
                 window.alert("Try another square!");
-            }
+                }
 
             else {
                 self.userEntry('X');
 
                 var onComplete = function(error) {
-                                  if (error) {
-                                    console.log('Synchronization failed');
-                                  } else {
-                                    console.log('Synchronization succeeded');
-                                  }
-                                };
+                if (error) {
+                    console.log('Synchronization failed');
+                    }
+                else {
+                    console.log('Synchronization succeeded');
+                    }
+                    };
                 myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
-                                                           row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
-                                                           row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+                                                          row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                          row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
 
 
                 window.grid.count+=1
@@ -166,8 +230,16 @@ function MyViewModel_Cell(value){
                 checkDiagonal2()
 
 
-             }
+                                 }
+
+
+
+            }
+
         }
+
+
+
     }
     function userEntryCheckX(){
          return self.userEntry() == "X"
@@ -251,17 +323,30 @@ myFirebaseRef.on("value", firebaseCallFinished, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
 });
 
-function firebaseCallFinished (snapshot) {
+function firebaseCallFinished (snapshot,gamePlayPlace) {
     if (!window.grid){
         var gridData = snapshot.val()
-
         window.gridData = gridData
-        var gameChoice= chooseGame();
-
+        var gameSetup= chooseGame();
         console.log(gridData);
-        window.grid = new MyViewModel(gameChoice);
-        ko.applyBindings(window.grid);
-}
+
+        if (gamePlayPlace == "locally"){
+
+
+            window.grid = new MyViewModel(gameSetup, true);
+
+        }
+        else {
+                    window.grid = new MyViewModel(gameSetup, false);
+
+                    window.confirm("this multiplayer")
+//            if(playerChoice == "Player1"){
+//
+//            }
+
+            }
+         ko.applyBindings(window.grid);
+    }
 }
 //-----------------------------------------------------------------------------------------------
 
