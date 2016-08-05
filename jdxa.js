@@ -10,7 +10,7 @@ function chooseGame(){
     var gameExists = false;
     while(gameExists == false){
          window.gamePlayPlace = window.prompt("Would you like to play locally or multiplayer?", "Enter Here: ");
-        var gameChoice = window.prompt("Which game would you like to access? e.g. GameInProgress1, GameInProgress2 etc","Enter Here: ");
+         window.gameChoice = window.prompt("Which game would you like to access? e.g. GameInProgress1, GameInProgress2 etc","Enter Here: ");
 
         var existenceCheck = window.gridData.hasOwnProperty(gameChoice);
 
@@ -25,10 +25,12 @@ function chooseGame(){
                 var playerCheck = window.gridData[gameChoice].player;
                 if (window.playerChoice == "Player"+playerCheck){
                     window.confirm("Confirmed: You are player 1")
+                    myFirebaseRef.child(playerChoice).update({player: "2"});
                 }
                 else{
                     window.confirm("Unfortunately Player1 is not available ")
                     window.playerChoice = "Player2"
+                    myFirebaseRef.child(playerChoice).update({player: "1"});
                 }
 
                 }
@@ -36,24 +38,29 @@ function chooseGame(){
                 var playerCheck = window.gridData[gameChoice].player;
                 if (window.playerChoice == "Player"+playerCheck){
                 window.prompt("Confirmed: You are player 2")
+                myFirebaseRef.child(playerChoice).update({player: "2"});
                 }
                 else{
                     window.confirm("Unfortunately Player2 is not available ")
                     window.playerChoice = "Player1"
+                    myFirebaseRef.child(playerChoice).update({player: "1"});
                 }
 
 
                 }
 
         }
+    else{
+        window.playerChoice = window.prompt("Which player would you like to be? e.g. Player1 or Player2","Enter Here: ");
+        }
     console.log(gameChoice);
-    return gameChoice;
+
     }
 
-function MyViewModel(gameChoice, isLocalGame){
+function MyViewModel( isLocalGame){
 
     var self = this;
-    self.isLocalGame= isLocalGame;
+    window.isLocalGame= isLocalGame;
     self.gridSetup = ko.observableArray([
     ko.observableArray([new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(0,1)),new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(2,3)),new MyViewModel_Cell(window.gridData[gameChoice].row1.substring(4,5))]),
     ko.observableArray([new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(0,1)),new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(2,3)) ,new MyViewModel_Cell(window.gridData[gameChoice].row2.substring(4,5))]),
@@ -71,8 +78,8 @@ function MyViewModel_Cell(value){
     var self = this;
     self.userEntry = ko.observable(value)
     this.updateGrid = function(location){
-    if (self.isLocalGame) {
-         if (player_one == 1){
+    if (window.isLocalGame) {
+         if (player_one === 1){
                     if (userEntryCheckX() || userEntryCheckO()) {
                         window.alert("Try another square!");
                     }
@@ -153,7 +160,7 @@ function MyViewModel_Cell(value){
 
     }
     else{
-        if (playerChoice == "Player1" ){
+        if (playerChoice === "Player1" ){
             if (userEntryCheckX() || userEntryCheckO()) {
                 window.alert("Try another square!");
                 }
@@ -177,11 +184,6 @@ function MyViewModel_Cell(value){
                 myFirebaseRef.child(gameChoice).update({row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
                                                         row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
                                                         row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  });
-
-
-
-
-
 
                 window.grid.count+=1
                 player_one=0
@@ -245,10 +247,10 @@ function MyViewModel_Cell(value){
 
     }
     function userEntryCheckX(){
-         return self.userEntry() == "X"
+         return self.userEntry() === "X"
          }
          function userEntryCheckO(){
-              return self.userEntry() == "0"
+              return self.userEntry() === "0"
               }
       var winner ;
           function checkWinnerHorizontal(row,p1,p2,p3){
@@ -330,26 +332,28 @@ function firebaseCallFinished (snapshot,gamePlayPlace) {
     if (!window.grid){
         var gridData = snapshot.val()
         window.gridData = gridData
-        var gameSetup= chooseGame();
+        chooseGame();
         console.log(gridData);
 
-        if (gamePlayPlace == "locally"){
-
-
-            window.grid = new MyViewModel(gameSetup, true);
-
+        if (window.gamePlayPlace == "locally"){
+            window.grid = new MyViewModel( true);
         }
         else {
-                    window.grid = new MyViewModel(gameSetup, false);
-
-                    window.confirm("this multiplayer")
-//            if(playerChoice == "Player1"){
-//
-//            }
-
-            }
-         ko.applyBindings(window.grid);
+              window.grid = new MyViewModel(false);
+              window.confirm("this multiplayer")
+              }
+        ko.applyBindings(window.grid);
+        }
+    } else {
+        window.grid.gridSetup()[0]()[0].userEntry(snapshot.val().GameInProgress1.row1.split(',')[0])
+        window.grid.gridSetup()[0]()[1].userEntry(snapshot.val().GameInProgress1.row1.split(',')[1])
+        window.grid.gridSetup()[0]()[2].userEntry(snapshot.val().GameInProgress1.row1.split(',')[2])
+        window.grid.gridSetup()[1]()[0].userEntry(snapshot.val().GameInProgress1.row2.split(',')[0])
+        window.grid.gridSetup()[1]()[1].userEntry(snapshot.val().GameInProgress1.row2.split(',')[1])
+        window.grid.gridSetup()[1]()[2].userEntry(snapshot.val().GameInProgress1.row2.split(',')[2])
+        window.grid.gridSetup()[2]()[0].userEntry(snapshot.val().GameInProgress1.row3.split(',')[0])
+        window.grid.gridSetup()[2]()[1].userEntry(snapshot.val().GameInProgress1.row3.split(',')[1])
+        window.grid.gridSetup()[2]()[2].userEntry(snapshot.val().GameInProgress1.row3.split(',')[2])
     }
-}
 //-----------------------------------------------------------------------------------------------
 
