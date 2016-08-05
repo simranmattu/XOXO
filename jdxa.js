@@ -92,9 +92,10 @@ function MyViewModel_Cell(value){
                           }
                         };
 
-                        myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
-                                                                 row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
-                                                                 row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+
+                        myFirebaseRef.child(gameChoice).update({row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
+                                                                row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                                row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  });
 
 
 
@@ -129,9 +130,10 @@ function MyViewModel_Cell(value){
                                             console.log('Synchronization succeeded');
                                           }
                                         };
-                        myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
-                                                                   row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
-                                                                   row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+                        myFirebaseRef.child(gameChoice).update({row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
+                                                                row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                                row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  });
+
 
 
                         window.grid.count+=1
@@ -172,9 +174,10 @@ function MyViewModel_Cell(value){
                             }
                             };
 
-                myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
-                                                          row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
-                                                          row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+                myFirebaseRef.child(gameChoice).update({row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
+                                                        row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                        row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  });
+
 
 
 
@@ -213,9 +216,9 @@ function MyViewModel_Cell(value){
                     console.log('Synchronization succeeded');
                     }
                     };
-                myFirebaseRef.update({ GameInProgress1: { row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
-                                                          row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
-                                                          row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  }});
+                myFirebaseRef.child(gameChoice).update({ row1: window.grid.gridSetup()[0]()[0].userEntry()+"," + window.grid.gridSetup()[0]()[1].userEntry()+"," +window.grid.gridSetup()[0]()[2].userEntry(),
+                                                         row2: window.grid.gridSetup()[1]()[0].userEntry()+","+window.grid.gridSetup()[1]()[1].userEntry()+","+window.grid.gridSetup()[1]()[2].userEntry(),
+                                                         row3: window.grid.gridSetup()[2]()[0].userEntry()+","+window.grid.gridSetup()[2]()[1].userEntry()+","+window.grid.gridSetup()[2]()[2].userEntry()  });
 
 
                 window.grid.count+=1
