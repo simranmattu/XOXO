@@ -344,7 +344,8 @@ function firebaseCallFinished (snapshot,gamePlayPlace) {
               }
         ko.applyBindings(window.grid);
         }
-    } else {
+
+    else {
         window.grid.gridSetup()[0]()[0].userEntry(snapshot.val().GameInProgress1.row1.split(',')[0])
         window.grid.gridSetup()[0]()[1].userEntry(snapshot.val().GameInProgress1.row1.split(',')[1])
         window.grid.gridSetup()[0]()[2].userEntry(snapshot.val().GameInProgress1.row1.split(',')[2])
@@ -354,6 +355,7 @@ function firebaseCallFinished (snapshot,gamePlayPlace) {
         window.grid.gridSetup()[2]()[0].userEntry(snapshot.val().GameInProgress1.row3.split(',')[0])
         window.grid.gridSetup()[2]()[1].userEntry(snapshot.val().GameInProgress1.row3.split(',')[1])
         window.grid.gridSetup()[2]()[2].userEntry(snapshot.val().GameInProgress1.row3.split(',')[2])
+    }
     }
 //-----------------------------------------------------------------------------------------------
 
